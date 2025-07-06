@@ -1,0 +1,145 @@
+.tour-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding: 1rem 0.5rem;
+}
+
+.section-title {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+/* Horizontal scroll row */
+.horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding-left: 0.5rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer */
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.tour-card {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  min-width: 200px;
+  max-width: 220px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card-active {
+  border: 2px solid var(--primary-color, #007bff);
+  background-color: #f0f8ff;
+}
+
+/* Tour card styles */
+.tour-card {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  min-width: 220px;
+  max-width: 240px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s;
+}
+
+.tour-card:hover {
+  transform: translateY(-4px);
+}
+
+.tour-card-img-wrapper {
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+}
+
+.tour-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tour-card-body {
+  padding: 0.7rem;
+}
+
+.tour-title {
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.tour-city,
+.tour-price {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 4px 0 0;
+}
+
+.card-active {
+  border: 2px solid var(--primary-color, #007bff);
+  background-color: #f0f8ff;
+}
+
+/* Tour-detail styles */
+
+.tour-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.07);
+  padding-bottom: 1.5rem;
+}
+
+.tour-detail-image-wrapper {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+}
+
+.tour-detail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tour-detail-body {
+  padding: 1.2rem;
+}
+
+.tour-detail-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.tour-desc {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 100%;
+}
+
+.action-btns {
+  flex-shrink: 0;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #009688;
+}

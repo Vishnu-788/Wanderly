@@ -1,0 +1,23 @@
+/* src/components/FooterStyles.css */
+
+.travel-footer {
+  background-color: #03045e;
+  color: #ffffff;
+  font-size: 0.9rem;
+  border-top: 5px solid #00b4d8;
+}
+
+.travel-footer a {
+  color: #90e0ef;
+  text-decoration: none;
+}
+
+.travel-footer a:hover {
+  text-decoration: underline;
+  color: #ffffff;
+}
+
+.travel-footer input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}

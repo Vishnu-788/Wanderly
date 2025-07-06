@@ -1,0 +1,20 @@
+.signin-page {
+  background-color: #f8f9fa;
+}
+
+.signin-card {
+  overflow: hidden;
+  border-radius: 1rem;
+  min-height: 400px;
+}
+
+.signin-img-container {
+  height: 100%;
+}
+
+.signin-img {
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+}

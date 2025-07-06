@@ -1,0 +1,30 @@
+/* styles/split-view.css */
+.split-view {
+  height: calc(100vh - 64px);
+  overflow: hidden;
+}
+
+.list-pane {
+  overflow-y: auto;
+  background-color: #ffffff;
+  padding: 1rem;
+  border-right: 1px solid #dee2e6;
+}
+
+.detail-pane {
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  padding: 2rem;
+}
+
+.card-active {
+  border: 2px solid var(--primary-color);
+  background-color: #e8f4ff;
+  transition: 0.2s ease;
+}
+
+.placeholder {
+  font-size: 1.2rem;
+  color: #999;
+  padding: 2rem;
+}
