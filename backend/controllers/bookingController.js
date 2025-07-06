@@ -8,13 +8,8 @@ export const createBooking = async (req, res) => {
       userId: req.user.id,
     };
 
-    console.log("Booking data before creation: ", bookingData);
-
     const newBooking = new Booking(bookingData);
-    console.log("Booking data: ", newBooking);
-
     const savedBooking = await newBooking.save();
-    console.log("Reached handler: ", savedBooking);
 
     res.status(200).json({
       success: true,
@@ -30,13 +25,13 @@ export const createBooking = async (req, res) => {
 
 // get single booking
 export const getBooking = async (req, res) => {
-  const id = req.params.id;
+  const userId = req.params.id;
   try {
-    const book = await Booking.findById(id);
+    const bookings = await Booking.find({ userId: userId });
     res.status(200).json({
       success: true,
       message: "booking found",
-      data: book,
+      data: bookings,
     });
   } catch (err) {
     res.status(404).json({ success: false, message: "booking not found" });

@@ -43,9 +43,6 @@ const Header = () => {
                     id="user-nav-dropdown"
                     className="nav-item-custom"
                   >
-                    <NavDropdown.Item as={Link} to="/profile">
-                      My Profile
-                    </NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item onClick={handleLogout}>
                       Logout
