@@ -2,19 +2,22 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { Card, Container, Spinner, Alert } from "react-bootstrap";
+import { BASE_URL } from "../utils/constants";
 
 function ViewBookings() {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const user = useSelector((state) => state.auth.user);
+  console.log("User: ", user);
 
   const fetchBookings = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:4000/api/v1/booking/${user._id}`,
-        { withCredentials: true }
-      );
+      const response = await axios.get(`${BASE_URL}/booking/${user.userId}`, {
+        withCredentials: true,
+      });
+      console.log(response);
+
       setBookings(response.data.data);
     } catch (err) {
       console.error("Error fetching bookings:", err);
@@ -25,10 +28,10 @@ function ViewBookings() {
   };
 
   useEffect(() => {
-    if (user?._id) {
+    if (user?.userId) {
       fetchBookings();
     }
-  }, [user._id]);
+  }, [user.userId]);
 
   const formatDate = (isoDate) =>
     new Date(isoDate).toLocaleDateString("en-IN", {

@@ -4,7 +4,7 @@ import axios from "axios";
 import { Modal, Button, Form, Row, Col, Alert } from "react-bootstrap";
 import { FiCalendar, FiPhone, FiUsers } from "react-icons/fi";
 import { MdEmail, MdOutlinePerson } from "react-icons/md";
-
+import { BASE_URL } from "../../../utils/constants";
 const BookingModal = ({ show, closeModal, tourName }) => {
   // ---------- form state ----------
   const [form, setForm] = useState({
@@ -31,7 +31,7 @@ const BookingModal = ({ show, closeModal, tourName }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/v1/booking/",
+        `${BASE_URL}/v1/booking/`,
         { ...form },
         { withCredentials: true }
       );

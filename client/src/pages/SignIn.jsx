@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../features/authSlice";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
 import "../styles/Signform.css";
 
 const SignIn = () => {
@@ -17,7 +18,7 @@ const SignIn = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/v1/auth/login",
+        `${BASE_URL}/auth/login`,
         { email, password },
         { withCredentials: true }
       );

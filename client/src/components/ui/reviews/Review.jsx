@@ -5,6 +5,7 @@ import ReviewForm from "./ReviewForm";
 import { useSelector } from "react-redux";
 import { Container, Button, Row, Col, Alert } from "react-bootstrap";
 import "./review.css";
+import { BASE_URL } from "../../../utils/constants";
 
 function Review({ tourId }) {
   const user = useSelector((state) => state.auth.user);
@@ -13,10 +14,9 @@ function Review({ tourId }) {
 
   const fetchReviews = async () => {
     try {
-      const res = await axios.get(
-        `http://localhost:4000/api/v1/review/${tourId}`,
-        { withCredentials: true }
-      );
+      const res = await axios.get(`${BASE_URL}/review/${tourId}`, {
+        withCredentials: true,
+      });
       setReviews(res.data.data);
     } catch (err) {
       console.error("Error fetching reviews:", err);

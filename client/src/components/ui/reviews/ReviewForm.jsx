@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Form, Button, FloatingLabel, Alert } from "react-bootstrap";
 import "./review.css";
+import { BASE_URL } from "../../../utils/constants";
 
 function ReviewForm({ tourId, closeForm, onSubmitSuccess }) {
   const [username, setUsername] = useState("");
@@ -19,13 +20,9 @@ function ReviewForm({ tourId, closeForm, onSubmitSuccess }) {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/v1/review",
-        data,
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.post(`${BASE_URL}/review`, data, {
+        withCredentials: true,
+      });
 
       if (response.status === 201) {
         onSubmitSuccess();

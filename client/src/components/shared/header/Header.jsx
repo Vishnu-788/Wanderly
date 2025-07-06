@@ -1,32 +1,32 @@
 // src/components/NavbarComponent.jsx
 import React from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { FaUserCircle } from "react-icons/fa";
+import { BASE_URL } from "../../../utils/constants";
 import axios from "axios";
 import { logout } from "../../../features/authSlice";
-import { FaUserCircle } from "react-icons/fa";
+
 import "./header.css";
 
 const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const navigate = useNavigate("/");
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/v1/auth/logout",
-        null,
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.post(`${BASE_URL}/auth/logout`, null, {
+        withCredentials: true,
+      });
       if (response.data.success) {
         dispatch(logout());
       }
     } catch (error) {
       console.log("Error logiig out user: ", error);
     }
+    navigate("/");
   };
 
   return (

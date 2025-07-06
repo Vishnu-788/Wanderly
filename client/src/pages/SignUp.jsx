@@ -4,6 +4,7 @@ import { setUser } from "../features/authSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
+import { BASE_URL } from "../utils/constants";
 import "../styles/Signform.css";
 
 const SignUp = () => {
@@ -19,7 +20,7 @@ const SignUp = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/v1/auth/register",
+        `${BASE_URL}/auth/register`,
         { username, email, password },
         { withCredentials: true }
       );

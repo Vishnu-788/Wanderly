@@ -7,6 +7,7 @@ import "./tours.css";
 import TourDetail from "./TourDetail";
 import Review from "../reviews/Review";
 import QuoteCarousel from "../carousel/QuoteCaraousel";
+import { BASE_URL } from "../../../utils/constants";
 
 const TourList = () => {
   const [featuredTours, setFeaturedTours] = useState([]);
@@ -17,7 +18,7 @@ const TourList = () => {
   useEffect(() => {
     const fetchTours = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/v1/tours");
+        const res = await axios.get(`${BASE_URL}/tours`);
         const allTours = res.data.data;
 
         const featured = allTours.filter((tour) => tour.featured === true);
