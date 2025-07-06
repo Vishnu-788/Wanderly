@@ -3,15 +3,30 @@ import React from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 import { logout } from "../../../features/authSlice";
-import "./header.css"; // navbar-specific styles
+import { FaUserCircle } from "react-icons/fa";
+import "./header.css";
 
 const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
 
-  const handleLogout = () => {
-    dispatch(logout());
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/auth/logout",
+        null,
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.data.success) {
+        dispatch(logout());
+      }
+    } catch (error) {
+      console.log("Error logiig out user: ", error);
+    }
   };
 
   return (
@@ -24,7 +39,6 @@ const Header = () => {
           <Navbar.Toggle aria-controls="travel-navbar-nav" />
           <Navbar.Collapse id="travel-navbar-nav">
             <Nav className="ms-auto">
-              {/* Always visible */}
               <Nav.Link as={Link} to="/" className="nav-item-custom">
                 Tours
               </Nav.Link>
@@ -39,11 +53,15 @@ const Header = () => {
                     Bookings
                   </Nav.Link>
                   <NavDropdown
-                    title={user.username || "Profile"}
+                    title={
+                      <span className="user-dropdown-title">
+                        <FaUserCircle className="user-icon" />
+                        {user.username || "Profile"}
+                      </span>
+                    }
                     id="user-nav-dropdown"
-                    className="nav-item-custom"
+                    className="dropdown-custom"
                   >
-                    <NavDropdown.Divider />
                     <NavDropdown.Item onClick={handleLogout}>
                       Logout
                     </NavDropdown.Item>

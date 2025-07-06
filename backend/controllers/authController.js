@@ -74,6 +74,8 @@ export const login = async (req, res) => {
 
 /* ---------- logout ---------- */
 export const logout = (req, res) => {
+  console.log("Logout handler");
+
   res
     .clearCookie("accessToken", {
       httpOnly: true,

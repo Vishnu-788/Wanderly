@@ -1,30 +1,100 @@
+:root {
+  --primary-color: #ff385c;
+  --secondary-color: #e11d48;
+  --accent-color: #fff1f2;
+  --bg-color: #f7f7f7;
+  --text-color: #222222;
+}
+
 .travel-navbar {
-  background-color: var(--primary-color) !important; /* Airbnb pink */
+  background-color: var(--primary-color) !important;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-brand,
-.navbar-nav .nav-link,
-.navbar-nav .nav-item-custom {
+.navbar-brand {
   color: white !important;
-  font-weight: 600;
-  margin-left: 10px;
-  margin-right: 10px;
-  transition: color 0.3s ease;
+  font-weight: 700;
+  font-size: 1.4rem;
 }
 
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-item-custom:hover {
-  color: var(--accent-color) !important; /* Light pink on hover */
+/* Rectangular buttons with small curve */
+.nav-item-custom {
+  background-color: var(--accent-color);
+  border: 1px solid #ffffff;
+  border-radius: 6px;
+  padding: 6px 14px;
+  margin: 0 8px;
+  color: var(--primary-color) !important;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+}
+
+.nav-item-custom:hover {
+  background-color: var(--primary-color);
+  color: white !important;
+  border-color: var(--primary-color);
 }
 
 .navbar-toggler {
   border-color: rgba(255, 255, 255, 0.5);
 }
 
+/* Style the dropdown toggle */
+.dropdown-custom .nav-link {
+  background-color: var(--accent-color);
+  border: 1px solid #ffffff;
+  border-radius: 6px;
+  padding: 6px 14px;
+  margin: 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--primary-color) !important;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.dropdown-custom .nav-link:hover {
+  background-color: var(--primary-color);
+  color: white !important;
+  border-color: var(--primary-color);
+}
+
+/* User icon inside dropdown toggle */
+.user-icon {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.user-dropdown-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Dropdown menu style */
+.dropdown-custom .dropdown-menu {
+  background-color: #fff;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  margin-top: 8px;
+}
+
+.dropdown-custom .dropdown-item:hover {
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+}
+
 @media (max-width: 768px) {
   .navbar-nav .nav-item-custom {
-    margin: 8px 0;
-    text-align: center;
+    margin: 6px 0;
+    padding: 6px 12px;
+    width: 100%;
+  }
+
+  .dropdown-custom .nav-link {
+    width: 100%;
+    justify-content: center;
   }
 }
