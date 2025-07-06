@@ -80,7 +80,7 @@ function ReviewForm({ tourId, closeForm, onSubmitSuccess }) {
         </FloatingLabel>
 
         <div className="d-flex justify-content-end gap-2">
-          <Button className="wander-btn-outline" onClick={closeForm}>
+          <Button className="wander-btn" onClick={closeForm}>
             Cancel
           </Button>
           <Button className="wander-btn" type="submit">

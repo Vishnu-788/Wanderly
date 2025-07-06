@@ -19,7 +19,7 @@ const SignUp = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/v1/auth/register", // 🛠️ Correct endpoint
+        "http://localhost:4000/api/v1/auth/register",
         { username, email, password },
         { withCredentials: true }
       );

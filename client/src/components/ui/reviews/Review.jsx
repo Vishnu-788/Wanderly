@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ReviewCard from "./ReviewCard";
 import ReviewForm from "./ReviewForm";
+import { useSelector } from "react-redux";
 import { Container, Button, Row, Col, Alert } from "react-bootstrap";
 import "./review.css";
 
 function Review({ tourId }) {
+  const user = useSelector((state) => state.auth.user);
   const [reviews, setReviews] = useState([]);
   const [isReviewFormOpen, setIsReviewFormOpen] = useState(false);
 
@@ -31,15 +33,16 @@ function Review({ tourId }) {
         <Col>
           <h4 className="mb-0 text-primary-pink">User Reviews</h4>
         </Col>
-
-        <Col xs="auto">
-          <Button
-            className={isReviewFormOpen ? "wander-btn-outline" : "wander-btn"}
-            onClick={() => setIsReviewFormOpen(!isReviewFormOpen)}
-          >
-            {isReviewFormOpen ? "Close Review Form" : "Add Review 📝"}
-          </Button>
-        </Col>
+        {user && (
+          <Col xs="auto">
+            <Button
+              className={"wander-btn"}
+              onClick={() => setIsReviewFormOpen(!isReviewFormOpen)}
+            >
+              {isReviewFormOpen ? "Close Review Form" : "Add Review 📝"}
+            </Button>
+          </Col>
+        )}
       </Row>
 
       {isReviewFormOpen && (

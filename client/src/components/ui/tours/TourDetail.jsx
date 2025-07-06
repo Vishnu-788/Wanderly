@@ -3,10 +3,12 @@ import BookingModal from "../bookings/BookingModal";
 import { Button } from "react-bootstrap";
 import { FiMapPin, FiUsers, FiCompass } from "react-icons/fi";
 import { BsCurrencyRupee } from "react-icons/bs";
+import { useSelector } from "react-redux";
 import "./tours.css";
 
 const TourDetail = ({ tour, toggleReview, showReviews }) => {
   if (!tour) return <p>No tour selected.</p>;
+  const user = useSelector((state) => state.auth.user);
   const [showBookingModal, setShowBookingModal] = useState(false);
 
   const { photo, title, city, desc, price, maxGroupSize, distance } = tour;
@@ -54,13 +56,14 @@ const TourDetail = ({ tour, toggleReview, showReviews }) => {
             <Button className="wander-btn" onClick={toggleReview}>
               {showReviews ? "Close Reviews" : "Show Reviews"}
             </Button>
-
-            <Button
-              className="wander-btn"
-              onClick={() => setShowBookingModal(true)}
-            >
-              Book
-            </Button>
+            {user && (
+              <Button
+                className="wander-btn"
+                onClick={() => setShowBookingModal(true)}
+              >
+                Book
+              </Button>
+            )}
           </div>
         </div>
       </div>

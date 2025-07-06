@@ -8,67 +8,64 @@ const generateToken = (user) =>
     expiresIn: "15d", // 15‑day session
   });
 
+//only returns when the response is success
 const sendAuthResponse = (user, res, statusCode = 200) => {
   const token = generateToken(user);
-  const { password, role, ...rest } = user._doc;
+
+  const { _id: userId, username, email, role } = user._doc;
 
   return res
     .cookie("accessToken", token, {
       httpOnly: true,
       sameSite: "Lax",
-      secure: false, // HTTPS in prod
+      secure: false, // Set to true if using HTTPS in production
       maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
-    }) // cookie options :contentReference[oaicite:1]{index=1}
+    })
     .status(statusCode)
-    .json({ success: true, data: { ...rest }, role });
+    .json({
+      success: true,
+      data: {
+        userId,
+        username,
+        email,
+      },
+      role,
+    });
 };
 
 /* ---------- registration ---------- */
 export const register = async (req, res) => {
+  const { username, email, password } = req.body;
+  console.log("Handler invoked");
+
+  console.log(username, email, password);
+
   try {
-    const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(req.body.password, salt);
+    const user = await User.register(username, email, password);
+    console.log("User created");
+    sendAuthResponse(user, res);
+    console.log("Response send");
+  } catch (error) {
+    console.log("Error", error);
 
-    const newUser = await User.create({
-      username: req.body.username,
-      email: req.body.email,
-      password: hash,
-      photo: req.body.photo,
-      role: "user",
+    res.status(400).json({
+      success: false,
+      message: error.message,
     });
-
-    return sendAuthResponse(newUser, res, 201); // same shape as login 🚀
-  } catch (err) {
-    console.error(err);
-    res
-      .status(500)
-      .json({ success: false, message: "Failed to create. Try again" });
   }
 };
 
 /* ---------- login ---------- */
 export const login = async (req, res) => {
+  const { email, password } = req.body;
   try {
-    const user = await User.findOne({ email: req.body.email }).select(
-      "+password"
-    );
-    if (!user)
-      return res
-        .status(404)
-        .json({ success: false, message: "User not found" });
-
-    const valid = await bcrypt.compare(req.body.password, user.password);
-    if (!valid)
-      return res
-        .status(401)
-        .json({ success: false, message: "Incorrect email or password" });
-
-    return sendAuthResponse(user, res);
-  } catch (err) {
-    console.error(err);
-    res
-      .status(500)
-      .json({ success: false, message: "Failed to login. Try again" });
+    const user = await User.login(email, password);
+    sendAuthResponse(user, res);
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
