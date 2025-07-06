@@ -1,5 +1,5 @@
 .travel-navbar {
-  background-color: var(--primary-color) !important;
+  background-color: var(--primary-color) !important; /* Airbnb pink */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -10,11 +10,12 @@
   font-weight: 600;
   margin-left: 10px;
   margin-right: 10px;
+  transition: color 0.3s ease;
 }
 
-.navbar-nav .nav-link:hover {
-  color: var(--accent-color) !important;
-  transition: 0.3s ease;
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-item-custom:hover {
+  color: var(--accent-color) !important; /* Light pink on hover */
 }
 
 .navbar-toggler {

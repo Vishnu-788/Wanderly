@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Form, Button, FloatingLabel, Alert } from "react-bootstrap";
+import "./review.css";
 
 function ReviewForm({ tourId, closeForm, onSubmitSuccess }) {
   const [username, setUsername] = useState("");
@@ -12,9 +13,9 @@ function ReviewForm({ tourId, closeForm, onSubmitSuccess }) {
     e.preventDefault();
     const data = {
       tour: tourId,
-      username: username,
-      rating: rating,
-      reviewText: reviewText,
+      username,
+      rating,
+      reviewText,
     };
 
     try {
@@ -39,8 +40,8 @@ function ReviewForm({ tourId, closeForm, onSubmitSuccess }) {
   };
 
   return (
-    <div className="p-4 border rounded bg-light">
-      <h4 className="mb-3">Write a Review</h4>
+    <div className="p-4 rounded review-form-container">
+      <h4 className="mb-3 text-primary-pink">📝 Write a Review</h4>
 
       {error && <Alert variant="danger">{error}</Alert>}
 
@@ -79,10 +80,10 @@ function ReviewForm({ tourId, closeForm, onSubmitSuccess }) {
         </FloatingLabel>
 
         <div className="d-flex justify-content-end gap-2">
-          <Button variant="secondary" onClick={closeForm}>
+          <Button className="wander-btn-outline" onClick={closeForm}>
             Cancel
           </Button>
-          <Button variant="primary" type="submit">
+          <Button className="wander-btn" type="submit">
             Submit Review
           </Button>
         </div>

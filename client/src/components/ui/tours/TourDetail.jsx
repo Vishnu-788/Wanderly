@@ -3,7 +3,7 @@ import BookingModal from "../bookings/BookingModal";
 import { Button } from "react-bootstrap";
 import { FiMapPin, FiUsers, FiCompass } from "react-icons/fi";
 import { BsCurrencyRupee } from "react-icons/bs";
-import "./styles/tours.css";
+import "./tours.css";
 
 const TourDetail = ({ tour, toggleReview, showReviews }) => {
   if (!tour) return <p>No tour selected.</p>;
@@ -51,10 +51,14 @@ const TourDetail = ({ tour, toggleReview, showReviews }) => {
           <p className="tour-desc flex-grow-1">{desc}</p>
 
           <div className="action-btns d-flex flex-column gap-2">
-            <Button variant="info" onClick={toggleReview}>
+            <Button className="wander-btn" onClick={toggleReview}>
               {showReviews ? "Close Reviews" : "Show Reviews"}
             </Button>
-            <Button variant="info" onClick={() => setShowBookingModal(true)}>
+
+            <Button
+              className="wander-btn"
+              onClick={() => setShowBookingModal(true)}
+            >
               Book
             </Button>
           </div>

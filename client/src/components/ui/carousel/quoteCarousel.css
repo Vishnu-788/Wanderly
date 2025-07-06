@@ -1,0 +1,67 @@
+/* src/components/QuoteCarousel.css */
+
+.quote-carousel-wrapper {
+  background-color: #fff;
+  border: 2px solid var(--primary-color); /* pink border */
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 8px 16px rgba(255, 56, 92, 0.1);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quote-card {
+  text-align: center;
+  color: var(--text-color);
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.quote-text {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  font-family: "Georgia", serif;
+  margin-bottom: 0.5rem;
+}
+
+.quote-author {
+  font-size: 1rem;
+  color: #555;
+  font-style: italic;
+}
+
+/* Indicator dots customization */
+.carousel-indicators [data-bs-target] {
+  background-color: var(--primary-color);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 0 4px;
+}
+
+/* Center carousel indicators and theme them */
+.carousel-indicators {
+  justify-content: center !important;
+  bottom: -20px; /* pull them closer if needed */
+  gap: 8px;
+}
+
+.carousel-indicators [data-bs-target] {
+  background-color: var(--primary-color); /* Use pink theme color */
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  opacity: 0.4;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicators .active {
+  background-color: var(--primary-color); /* Make active pink */
+  opacity: 1;
+  width: 12px;
+  height: 12px;
+}

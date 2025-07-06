@@ -1,7 +1,7 @@
 import React from "react";
 import { FiMapPin } from "react-icons/fi";
 import { BsCurrencyRupee } from "react-icons/bs";
-import "./styles/tours.css";
+import "./tours.css";
 
 const TourCard = ({ tour, onClick, active }) => {
   const { photo, title, city, price } = tour;

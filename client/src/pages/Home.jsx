@@ -3,7 +3,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import ToursList from "../components/ui/tours/ToursList";
 
-import "../styles/split-view.css";
+import "../styles/home.css";
 
 const Home = () => {
   return (

@@ -10,6 +10,7 @@
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
   padding-left: 0.5rem;
+  color: var(--primary-color);
 }
 
 /* Horizontal scroll row */
@@ -19,29 +20,15 @@
   gap: 1rem;
   padding-left: 0.5rem;
   scroll-snap-type: x mandatory;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .horizontal-scroll::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+  display: none;
 }
 
-.tour-card {
-  flex: 0 0 auto;
-  scroll-snap-align: start;
-  min-width: 200px;
-  max-width: 220px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.card-active {
-  border: 2px solid var(--primary-color, #007bff);
-  background-color: #f0f8ff;
-}
-
-/* Tour card styles */
+/* Tour Card */
 .tour-card {
   flex: 0 0 auto;
   scroll-snap-align: start;
@@ -49,13 +36,20 @@
   max-width: 240px;
   border-radius: 10px;
   overflow: hidden;
-  background-color: white;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(255, 56, 92, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 2px solid transparent;
 }
 
 .tour-card:hover {
   transform: translateY(-4px);
+  box-shadow: 0 0 16px rgba(255, 56, 92, 0.15);
+}
+
+.card-active {
+  border: 2px solid var(--primary-color);
+  background-color: var(--accent-color);
 }
 
 .tour-card-img-wrapper {
@@ -78,18 +72,14 @@
   font-weight: 600;
   font-size: 1rem;
   margin: 0;
+  color: var(--primary-color);
 }
 
 .tour-city,
 .tour-price {
   font-size: 0.9rem;
-  color: #555;
+  color: #666;
   margin: 4px 0 0;
-}
-
-.card-active {
-  border: 2px solid var(--primary-color, #007bff);
-  background-color: #f0f8ff;
 }
 
 /* Tour-detail styles */
@@ -101,7 +91,7 @@
   background-color: #fff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 0 12px rgba(255, 56, 92, 0.1);
   padding-bottom: 1.5rem;
 }
 
@@ -125,6 +115,7 @@
   font-size: 1.6rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
+  color: var(--primary-color);
 }
 
 .tour-desc {
@@ -132,6 +123,7 @@
   line-height: 1.6;
   margin: 0;
   max-width: 100%;
+  color: var(--text-color);
 }
 
 .action-btns {
@@ -141,5 +133,17 @@
 .price {
   font-weight: bold;
   font-size: 1.1rem;
-  color: #009688;
+  color: var(--secondary-color);
+}
+
+.wander-btn {
+  background-color: var(--primary-color); /* Airbnb pink */
+  border: none;
+  color: white;
+  font-weight: 600;
+}
+
+.wander-btn:hover {
+  background-color: var(--secondary-color); /* Slightly deeper pink */
+  color: white;
 }

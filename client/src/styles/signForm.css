@@ -1,0 +1,32 @@
+/* Page background matches app background */
+.signin-page {
+  background-color: var(--bg-color);
+}
+
+/* Card look & feel */
+.signin-card {
+  border-radius: 1rem;
+  overflow: hidden; /* keeps rounded corners on accent side */
+}
+
+/* Airbnb‑pink button */
+.btn-primary {
+  background-color: var(--primary-color);
+  border: none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--secondary-color);
+}
+
+/* Right column accent */
+.signin-accent {
+  background-color: var(--accent-color); /* light pink */
+  color: var(--primary-color); /* core pink for text/icons */
+}
+
+/* Optional small tweak for primary text color */
+.text-primary {
+  color: var(--primary-color) !important;
+}

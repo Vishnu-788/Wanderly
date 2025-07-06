@@ -4,7 +4,7 @@ import { setUser } from "../features/authSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
-import "../styles/SignIn.css"; // same styles as SignIn
+import "../styles/Signform.css";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -19,36 +19,36 @@ const SignUp = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/v1/auth/login",
-        { email, password },
+        "http://localhost:4000/api/v1/auth/register", // 🛠️ Correct endpoint
+        { username, email, password },
         { withCredentials: true }
       );
 
       const user = res.data.data;
       user.role = res.data.role;
-      console.log("user: ", user);
-      console.log("res: ", res);
 
       dispatch(setUser(user));
       navigate("/");
     } catch (err) {
-      console.error("Error logging in:", err);
+      console.error("Error signing up:", err);
+      // Optional: set an error state for UI
     }
   };
 
   return (
-    <div className="signin-page d-flex align-items-center justify-content-center vh-100">
+    <div className="signin-page d-flex align-items-center justify-content-center min-vh-100">
       <Container>
         <Row className="justify-content-center">
-          <Col md={8}>
-            <Card className="signin-card shadow-lg border-0">
+          <Col md={10} lg={8}>
+            <Card className="signin-card shadow border-0">
               <Row className="g-0">
-                {/* Left side: Form */}
-                <Col
-                  md={6}
-                  className="p-4 d-flex flex-column justify-content-center"
-                >
-                  <h3 className="mb-4 text-center">Register</h3>
+                {/* ───── Left: Registration Form ───── */}
+                <Col md={6} className="p-4">
+                  <h3 className="mb-4 text-center text-primary">
+                    Create your <span className="fw-bold">WanderLy</span>{" "}
+                    account
+                  </h3>
+
                   <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formUsername">
                       <Form.Label>Username</Form.Label>
@@ -57,6 +57,7 @@ const SignUp = () => {
                         placeholder="Enter username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        required
                       />
                     </Form.Group>
 
@@ -67,16 +68,18 @@ const SignUp = () => {
                         placeholder="Enter email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        required
                       />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formPassword">
+                    <Form.Group className="mb-4" controlId="formPassword">
                       <Form.Label>Password</Form.Label>
                       <Form.Control
                         type="password"
                         placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        required
                       />
                     </Form.Group>
 
@@ -85,22 +88,26 @@ const SignUp = () => {
                     </Button>
                   </Form>
 
-                  <p className="mt-3 text-center text-muted">
-                    Already have an account? <a href="/signin">Sign In</a>
+                  <p className="mt-3 text-center text-muted small">
+                    Already have an account?{" "}
+                    <a href="/signin" className="text-decoration-none">
+                      Sign In
+                    </a>
                   </p>
                 </Col>
 
-                {/* Right side: Motivational travel text */}
+                {/* ───── Right: Brand Section ───── */}
                 <Col
                   md={6}
-                  className="signin-text-container d-none d-md-flex align-items-center justify-content-center"
+                  className="signin-accent d-none d-md-flex flex-column align-items-center justify-content-center text-center"
                 >
-                  <div className="signin-text-content text-black text-center px-4">
-                    <h2 className="mb-3">✈️ Get Ready!</h2>
-                    <p>
-                      Sign up and start exploring the world with TravelWise.
-                    </p>
-                  </div>
+                  <h2 className="display-6 fw-bold mb-3">
+                    🌍 Welcome to WanderLy
+                  </h2>
+                  <p className="px-4">
+                    Create your account and start your next unforgettable
+                    adventure.
+                  </p>
                 </Col>
               </Row>
             </Card>

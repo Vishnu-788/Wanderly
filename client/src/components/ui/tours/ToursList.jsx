@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TourCard from "./TourCard";
 import { Col, Row } from "react-bootstrap";
-import "./styles/tours.css";
+import "./tours.css";
 import TourDetail from "./TourDetail";
 import Review from "../reviews/Review";
+import QuoteCarousel from "../carousel/QuoteCaraousel";
 
 const TourList = () => {
   const [featuredTours, setFeaturedTours] = useState([]);
@@ -84,7 +85,7 @@ const TourList = () => {
             showReviews={showReviews}
           />
         ) : (
-          <p className="placeholder">← Click a tour card to view details</p>
+          <QuoteCarousel />
         )}
       </Col>
     </Row>

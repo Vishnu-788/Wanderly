@@ -1,0 +1,98 @@
+/* ========== Global Utility ========== */
+.text-primary-pink {
+  color: var(--primary-color);
+}
+
+/* ========== Review Section (Wrapper) ========== */
+.review-section {
+  background-color: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 0 12px rgba(255, 56, 92, 0.1);
+  margin-bottom: 2rem;
+}
+
+/* ========== Review Form ========== */
+.review-form-container {
+  background-color: #fff;
+  border: 1px solid var(--accent-color);
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 0 10px rgba(255, 56, 92, 0.08);
+}
+
+/* ========== WanderLy Buttons ========== */
+.wander-btn {
+  background-color: var(--primary-color);
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.wander-btn:hover,
+.wander-btn:focus {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.wander-btn-outline {
+  background-color: white;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  font-weight: 600;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.wander-btn-outline:hover,
+.wander-btn-outline:focus {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* ========== Review Card ========== */
+.review-card {
+  background-color: #fff;
+  border: 1px solid var(--accent-color);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 2px 6px rgba(255, 56, 92, 0.05);
+  margin-bottom: 1rem;
+}
+
+.review-card .review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.review-card .review-username {
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.review-card .review-rating {
+  color: #ffc107; /* Gold Star */
+  font-size: 1.1rem;
+}
+
+.review-card .review-text {
+  color: var(--text-color);
+  line-height: 1.5;
+  margin-top: 0.5rem;
+}
+
+/* ========== Alerts ========== */
+.review-alert {
+  border-left: 4px solid var(--primary-color);
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+}

@@ -8,20 +8,16 @@ import "./review.css";
 function Review({ tourId }) {
   const [reviews, setReviews] = useState([]);
   const [isReviewFormOpen, setIsReviewFormOpen] = useState(false);
-  console.log("Tour ID in Review component: ", tourId);
 
   const fetchReviews = async () => {
     try {
-      const response = await axios.get(
+      const res = await axios.get(
         `http://localhost:4000/api/v1/review/${tourId}`,
-        {
-          withCredentials: true,
-        }
+        { withCredentials: true }
       );
-      console.log("Fetched reviews: ", response.data);
-      setReviews(response.data.data);
+      setReviews(res.data.data);
     } catch (err) {
-      console.error("Error fetching reviews: ", err);
+      console.error("Error fetching reviews:", err);
     }
   };
 
@@ -32,15 +28,13 @@ function Review({ tourId }) {
   return (
     <Container className="my-4 review-section">
       <Row className="align-items-center mb-3">
-        {/* Left: Header */}
         <Col>
-          <h4 className="mb-0">User Reviews</h4>
+          <h4 className="mb-0 text-primary-pink">User Reviews</h4>
         </Col>
 
-        {/* Right: Button */}
         <Col xs="auto">
           <Button
-            variant={isReviewFormOpen ? "secondary" : "primary"}
+            className={isReviewFormOpen ? "wander-btn-outline" : "wander-btn"}
             onClick={() => setIsReviewFormOpen(!isReviewFormOpen)}
           >
             {isReviewFormOpen ? "Close Review Form" : "Add Review 📝"}
@@ -52,7 +46,7 @@ function Review({ tourId }) {
         <Row className="mb-4">
           <Col md={8} className="mx-auto">
             <ReviewForm
-              tourID={tourId}
+              tourId={tourId}
               closeForm={() => setIsReviewFormOpen(false)}
               onSubmitSuccess={fetchReviews}
             />
@@ -69,7 +63,7 @@ function Review({ tourId }) {
           ))
         ) : (
           <Col>
-            <Alert variant="info">
+            <Alert variant="info" className="text-center">
               No reviews yet. Be the first to write one! 🌟
             </Alert>
           </Col>

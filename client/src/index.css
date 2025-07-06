@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
 
 :root {
-  --primary-color: #0077b6; /* ocean blue */
-  --secondary-color: #00b4d8;
-  --accent-color: #90e0ef;
-  --bg-color: #f8f9fa;
-  --text-color: #343a40;
+  --primary-color: #ff385c; /* Airbnb Core Pink */
+  --secondary-color: #e11d48; /* Darker Pink for hover/CTA */
+  --accent-color: #fff1f2; /* Soft Light Pink Background */
+  --bg-color: #f7f7f7; /* General Background */
+  --text-color: #222222; /* Airbnb's main text gray */
 }
 
 body {

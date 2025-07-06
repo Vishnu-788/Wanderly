@@ -19,13 +19,13 @@ const Header = () => {
       <Navbar expand="lg" sticky="top" className="travel-navbar">
         <Container>
           <Navbar.Brand as={Link} to="/" className="text-white fw-bold">
-            ✈️ TravelWise
+            Wanderly
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="travel-navbar-nav" />
           <Navbar.Collapse id="travel-navbar-nav">
             <Nav className="ms-auto">
               {/* Always visible */}
-              <Nav.Link as={Link} to="/tours" className="nav-item-custom">
+              <Nav.Link as={Link} to="/" className="nav-item-custom">
                 Tours
               </Nav.Link>
 
