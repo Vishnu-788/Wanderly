@@ -4,7 +4,6 @@ import Review from "../models/Review.js";
 export const createReview = async (req, res) => {
   // const tourId = req.params.tourId;
   const newReview = new Review({ ...req.body });
-  console.log("Reviews: ", newReview);
 
   try {
     const savedReview = await newReview.save();
@@ -13,7 +12,6 @@ export const createReview = async (req, res) => {
     await Tour.findByIdAndUpdate(savedReview.tourId, {
       $push: { reviews: savedReview._id },
     });
-    console.log("Review saved successfully:", savedReview);
 
     res
       .status(201)

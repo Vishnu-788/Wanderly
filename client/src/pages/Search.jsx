@@ -47,7 +47,7 @@ function Search() {
 
   return (
     <Container fluid className="search-wrapper">
-      <Row className="min-vh-100 pt-4">
+      <Row className="min-vh-100">
         {/* Left panel: Scrollable list */}
         <Col
           md={6}

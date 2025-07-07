@@ -13,7 +13,7 @@ function ReviewForm({ tourId, closeForm, onSubmitSuccess }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
-      tour: tourId,
+      tourId: tourId,
       username,
       rating,
       reviewText,
