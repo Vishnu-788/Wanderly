@@ -85,11 +85,20 @@
   color: var(--primary-color);
 }
 
+.auth-button {
+  min-width: 100px;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
-  .navbar-nav .nav-item-custom {
+  .navbar-nav {
+    flex-wrap: wrap !important;
+  }
+
+  .nav-item-custom.auth-button {
+    width: 100%;
     margin: 6px 0;
     padding: 6px 12px;
-    width: 100%;
   }
 
   .dropdown-custom .nav-link {

@@ -1,12 +1,13 @@
-// src/components/BookingModal.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Modal, Button, Form, Row, Col, Alert } from "react-bootstrap";
 import { FiCalendar, FiPhone, FiUsers } from "react-icons/fi";
+import { MdCheckCircle } from "react-icons/md";
+
 import { MdEmail, MdOutlinePerson } from "react-icons/md";
 import { BASE_URL } from "../../../utils/constants";
+
 const BookingModal = ({ show, closeModal, tourName }) => {
-  // ---------- form state ----------
   const [form, setForm] = useState({
     userEmail: "",
     tourName: tourName ?? "",
@@ -19,15 +20,27 @@ const BookingModal = ({ show, closeModal, tourName }) => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  // ---------- handlers ----------
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+
+    if (name === "phone") {
+      const numeric = value.replace(/\D/g, "");
+      if (numeric.length <= 10) {
+        setForm((prev) => ({ ...prev, phone: numeric }));
+      }
+    } else {
+      setForm((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+
+    if (!/^[6-9]\d{9}$/.test(form.phone)) {
+      setError("Please enter a valid 10-digit Indian phone number.");
+      return;
+    }
 
     try {
       const response = await axios.post(
@@ -42,7 +55,6 @@ const BookingModal = ({ show, closeModal, tourName }) => {
     }
   };
 
-  // ---------- auto-close on success ----------
   useEffect(() => {
     if (success) {
       const timer = setTimeout(() => {
@@ -57,7 +69,6 @@ const BookingModal = ({ show, closeModal, tourName }) => {
           bookAt: "",
         });
       }, 3000);
-
       return () => clearTimeout(timer);
     }
   }, [success, closeModal, tourName]);
@@ -72,11 +83,10 @@ const BookingModal = ({ show, closeModal, tourName }) => {
             </Modal.Header>
 
             <Modal.Body>
-              {/* User Email */}
+              {/* Email */}
               <Form.Group className="mb-3" controlId="bookingEmail">
                 <Form.Label>
-                  <MdEmail className="me-1" />
-                  Email
+                  <MdEmail className="me-1" /> Email
                 </Form.Label>
                 <Form.Control
                   type="email"
@@ -91,20 +101,19 @@ const BookingModal = ({ show, closeModal, tourName }) => {
               {/* Full Name */}
               <Form.Group className="mb-3" controlId="bookingName">
                 <Form.Label>
-                  <MdOutlinePerson className="me-1" />
-                  Full Name
+                  <MdOutlinePerson className="me-1" /> Full Name
                 </Form.Label>
                 <Form.Control
                   type="text"
                   name="fullName"
                   value={form.fullName}
                   onChange={handleChange}
-                  placeholder="John Doe"
+                  placeholder="Your Name"
                   required
                 />
               </Form.Group>
 
-              {/* Tour (read-only) + Guests */}
+              {/* Tour + Guests */}
               <Row className="mb-3">
                 <Col md={8}>
                   <Form.Group controlId="bookingTour">
@@ -120,8 +129,7 @@ const BookingModal = ({ show, closeModal, tourName }) => {
                 <Col md={4}>
                   <Form.Group controlId="bookingGuests">
                     <Form.Label>
-                      <FiUsers className="me-1" />
-                      Guests
+                      <FiUsers className="me-1" /> Guests
                     </Form.Label>
                     <Form.Control
                       type="number"
@@ -138,24 +146,29 @@ const BookingModal = ({ show, closeModal, tourName }) => {
               {/* Phone */}
               <Form.Group className="mb-3" controlId="bookingPhone">
                 <Form.Label>
-                  <FiPhone className="me-1" />
-                  Phone
+                  <FiPhone className="me-1" /> Phone
                 </Form.Label>
                 <Form.Control
                   type="tel"
                   name="phone"
                   value={form.phone}
                   onChange={handleChange}
-                  placeholder="+91‑98765‑43210"
+                  placeholder="9876543210"
+                  pattern="[6-9]{1}[0-9]{9}"
+                  title="Enter a valid 10-digit Indian mobile number"
                   required
                 />
+                {form.phone && form.phone.length < 10 && (
+                  <div className="text-danger small mt-1">
+                    Phone number must be 10 digits
+                  </div>
+                )}
               </Form.Group>
 
               {/* Date */}
               <Form.Group className="mb-1" controlId="bookingDate">
                 <Form.Label>
-                  <FiCalendar className="me-1" />
-                  Travel Date
+                  <FiCalendar className="me-1" /> Travel Date
                 </Form.Label>
                 <Form.Control
                   type="date"
@@ -188,14 +201,10 @@ const BookingModal = ({ show, closeModal, tourName }) => {
               <Modal.Title>Booking Confirmed!</Modal.Title>
             </Modal.Header>
             <Modal.Body className="text-center py-4">
-              <div
-                style={{
-                  fontSize: "4rem",
-                  color: "#FF385C", // Airbnb pink
-                }}
-              >
-                ✅
-              </div>
+              <MdCheckCircle
+                size={64}
+                style={{ color: "#28a745" }} // Bootstrap green
+              />
               <p className="mt-3 fs-5">
                 Your trip has been booked successfully!
               </p>

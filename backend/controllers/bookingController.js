@@ -1,5 +1,5 @@
 import Booking from "../models/Booking.js";
-
+import { sendBookingConfirmation } from "../utils/sendMail.js";
 // create new booking
 export const createBooking = async (req, res) => {
   try {
@@ -7,10 +7,14 @@ export const createBooking = async (req, res) => {
       ...req.body,
       userId: req.user.id,
     };
-    console.log("Booking called");
 
     const newBooking = new Booking(bookingData);
     const savedBooking = await newBooking.save();
+    await sendBookingConfirmation(savedBooking.userEmail, {
+      tourName: savedBooking.tourName,
+      date: savedBooking.bookAt,
+      guests: savedBooking.guestSize,
+    });
 
     res.status(200).json({
       success: true,
@@ -18,8 +22,8 @@ export const createBooking = async (req, res) => {
       data: savedBooking,
     });
   } catch (err) {
-    console.log("Error in createBooking: ", err);
-
+    console.log(err);
+    
     res.status(500).json({ success: false, message: "internal server error" });
   }
 };
