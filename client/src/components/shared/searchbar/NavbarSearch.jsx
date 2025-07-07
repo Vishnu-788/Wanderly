@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Form, FormControl, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import { FaSearch } from "react-icons/fa"; // 🔍 classy search icon
+import "./searchbar.css";
 
 const NavbarSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -23,44 +25,18 @@ const NavbarSearch = () => {
   };
 
   return (
-    <Form
-      onSubmit={handleSearch}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        marginLeft: "auto",
-        gap: "8px",
-        maxWidth: "300px",
-      }}
-    >
-      <FormControl
-        type="search"
+    <Form onSubmit={handleSearch} className="navbar-search-form">
+      <input
+        type="text"
         placeholder="Search tours..."
         aria-label="Search"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        style={{
-          flex: 1,
-          padding: "6px 10px",
-          fontSize: "14px",
-          borderRadius: "4px",
-          border: "1px solid #ccc",
-        }}
+        className="navbar-search-input"
       />
-      <Button
-        variant="light"
-        type="submit"
-        style={{
-          fontSize: "14px",
-          padding: "6px 12px",
-          border: "1px solid #fff",
-          borderRadius: "4px",
-          backgroundColor: "transparent",
-          color: "white",
-        }}
-      >
-        🔍
-      </Button>
+      <button type="submit" className="navbar-search-button">
+        <FaSearch />
+      </button>
     </Form>
   );
 };
