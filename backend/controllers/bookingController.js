@@ -7,6 +7,7 @@ export const createBooking = async (req, res) => {
       ...req.body,
       userId: req.user.id,
     };
+    console.log("Booking called");
 
     const newBooking = new Booking(bookingData);
     const savedBooking = await newBooking.save();

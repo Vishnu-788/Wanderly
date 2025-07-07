@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import ViewBookings from "./pages/ViewBookings";
+import Search from "./pages/Search";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/bookings" element={<ViewBookings />} />
+          <Route path="/search" element={<Search />} />
         </Route>
       </Routes>
     </>

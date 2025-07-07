@@ -31,7 +31,7 @@ const BookingModal = ({ show, closeModal, tourName }) => {
 
     try {
       const response = await axios.post(
-        `${BASE_URL}/v1/booking/`,
+        `${BASE_URL}/booking/`,
         { ...form },
         { withCredentials: true }
       );

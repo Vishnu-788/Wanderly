@@ -3,7 +3,6 @@ import {
   createTour,
   deleteTour,
   getAllTour,
-  getFeaturedTour,
   getSingleTour,
   getTourBySearch,
   getTourCount,
@@ -30,8 +29,6 @@ router.get("/", getAllTour);
 
 // get tour by search
 router.get("/search/getTourBySearch", getTourBySearch);
-
-router.get("/search/getFeaturedTours", getFeaturedTour);
 
 router.get("/search/getTourCount", getTourCount);
 

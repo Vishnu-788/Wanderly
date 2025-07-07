@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
 import { BASE_URL } from "../../../utils/constants";
+import NavbarSearch from "../searchbar/NavbarSearch";
 import axios from "axios";
 import { logout } from "../../../features/authSlice";
 
@@ -39,6 +40,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls="travel-navbar-nav" />
           <Navbar.Collapse id="travel-navbar-nav">
             <Nav className="ms-auto">
+              <NavbarSearch />
               <Nav.Link as={Link} to="/" className="nav-item-custom">
                 Tours
               </Nav.Link>
