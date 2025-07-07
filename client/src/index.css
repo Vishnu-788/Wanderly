@@ -40,3 +40,13 @@ h6 {
   background-color: var(--accent-color);
   border-color: var(--accent-color);
 }
+
+/* Optional scrollbar tweak */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}

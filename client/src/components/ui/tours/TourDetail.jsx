@@ -15,7 +15,6 @@ const TourDetail = ({ tour, toggleReview, showReviews }) => {
 
   return (
     <div className="tour-detail">
-      {/* Booking Modal */}
       {showBookingModal && (
         <BookingModal
           show={showBookingModal}
@@ -23,7 +22,7 @@ const TourDetail = ({ tour, toggleReview, showReviews }) => {
           tourName={title}
         />
       )}
-      {/* Image Banner */}
+
       <div className="tour-detail-image-wrapper">
         <img
           src={`/assets/${photo}`}
@@ -32,39 +31,40 @@ const TourDetail = ({ tour, toggleReview, showReviews }) => {
         />
       </div>
 
-      {/* Body */}
       <div className="tour-detail-body">
-        <div className="tour-header d-flex justify-content-between align-items-center">
-          <h2 className="tour-detail-title">{title}</h2>
-          <h5 className="price">
-            <BsCurrencyRupee className="me-1" />
-            {price}
-          </h5>
+        <div>
+          <div className="tour-header d-flex justify-content-between align-items-center">
+            <h2 className="tour-detail-title">{title}</h2>
+            <h5 className="price">
+              <BsCurrencyRupee className="me-1" />
+              {price}
+            </h5>
+          </div>
+
+          <p className="text-muted">
+            <FiMapPin className="me-1" /> {city} · <FiUsers className="me-1" />{" "}
+            Max Group: {maxGroupSize} · <FiCompass className="me-1" />{" "}
+            {distance} km
+          </p>
+
+          <div className="flex-grow-1">
+            <p className="tour-desc">{desc}</p>
+          </div>
         </div>
 
-        <p className="text-muted">
-          <FiMapPin className="me-1" /> {city} · <FiUsers className="me-1" />{" "}
-          Max Group: {maxGroupSize} · <FiCompass className="me-1" /> {distance}
-          km
-        </p>
-
-        {/* Flex wrapper for desc + buttons */}
-        <div className="d-flex justify-content-between flex-wrap gap-3">
-          <p className="tour-desc flex-grow-1">{desc}</p>
-
-          <div className="action-btns d-flex flex-column gap-2">
-            <Button className="wander-btn" onClick={toggleReview}>
-              {showReviews ? "Close Reviews" : "Show Reviews"}
+        {/* Stack buttons vertically on the left */}
+        <div className="action-btns-vertical mt-4">
+          <Button className="wander-btn" onClick={toggleReview}>
+            {showReviews ? "Close Reviews" : "Show Reviews"}
+          </Button>
+          {user && (
+            <Button
+              className="wander-btn"
+              onClick={() => setShowBookingModal(true)}
+            >
+              Book
             </Button>
-            {user && (
-              <Button
-                className="wander-btn"
-                onClick={() => setShowBookingModal(true)}
-              >
-                Book
-              </Button>
-            )}
-          </div>
+          )}
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ const ReviewCard = ({ review }) => {
   const { username, rating, reviewText, createdAt } = review;
 
   return (
-    <Card className="shadow-sm rounded-4 h-100">
+    <Card className="shadow-sm rounded-4 h-100" style={{ height: "250px" }}>
       <Card.Body className="d-flex flex-column">
         {/* Username */}
         <Card.Title className="mb-2 fw-bold fs-5 text-primary">
@@ -25,8 +25,17 @@ const ReviewCard = ({ review }) => {
           ))}
         </div>
 
-        {/* Review text */}
-        <Card.Text className="text-muted fs-6">{reviewText}</Card.Text>
+        {/* Review text scrollable box */}
+        <div
+          className="text-muted fs-6 mb-2"
+          style={{
+            maxHeight: "100px",
+            overflowY: "auto",
+            paddingRight: "4px",
+          }}
+        >
+          {reviewText}
+        </div>
 
         {/* Optional date */}
         <div className="mt-auto text-end">
