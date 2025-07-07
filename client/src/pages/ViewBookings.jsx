@@ -62,7 +62,15 @@ function ViewBookings() {
         </Alert>
       )}
 
-      <div className="d-flex flex-column align-items-center gap-4">
+      {/* Scrollable area below */}
+      <div
+        className="booking-scroll-area d-flex flex-column align-items-center gap-4"
+        style={{
+          maxHeight: "500px",
+          overflowY: "auto",
+          paddingRight: "0.5rem",
+        }}
+      >
         {bookings.map((booking) => (
           <Card
             key={booking._id}
