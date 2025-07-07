@@ -1,5 +1,4 @@
 import User from "../models/User.js";
-import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 /* ---------- helpers ---------- */
@@ -36,18 +35,12 @@ const sendAuthResponse = (user, res, statusCode = 200) => {
 /* ---------- registration ---------- */
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
-  console.log("Handler invoked");
-
-  console.log(username, email, password);
 
   try {
     const user = await User.register(username, email, password);
-    console.log("User created");
-    sendAuthResponse(user, res);
-    console.log("Response send");
-  } catch (error) {
-    console.log("Error", error);
 
+    sendAuthResponse(user, res);
+  } catch (error) {
     res.status(400).json({
       success: false,
       message: error.message,
@@ -71,8 +64,6 @@ export const login = async (req, res) => {
 
 /* ---------- logout ---------- */
 export const logout = (req, res) => {
-  console.log("Logout handler");
-
   res
     .clearCookie("accessToken", {
       httpOnly: true,

@@ -2,7 +2,15 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "../features/authSlice";
-import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Card,
+  Alert,
+} from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import "../styles/Signform.css";
@@ -10,6 +18,7 @@ import "../styles/Signform.css";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,7 +37,7 @@ const SignIn = () => {
       navigate("/");
     } catch (err) {
       console.error("Error logging in:", err);
-      // you could set an error state here for UI feedback
+      setError(err.response.data.message);
     }
   };
 
@@ -44,6 +53,11 @@ const SignIn = () => {
                   <h3 className="mb-4 text-center text-primary">
                     Sign in to <span className="fw-bold">WanderLy</span>
                   </h3>
+                  {error && (
+                    <Alert variant="danger" className="mx-3">
+                      {error}
+                    </Alert>
+                  )}
 
                   <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formEmail">

@@ -6,7 +6,6 @@ const userSchema = new mongoose.Schema(
     username: {
       type: String,
       required: true,
-      unique: true,
     },
     email: {
       type: String,
@@ -41,6 +40,7 @@ userSchema.statics.login = async function (email, password) {
 
 userSchema.statics.register = async function (username, email, password, role) {
   const emailExists = await this.findOne({ email });
+
   if (emailExists) {
     throw new Error("ALready one account is associated with this email");
   }

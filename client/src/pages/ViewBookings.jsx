@@ -58,7 +58,7 @@ function ViewBookings() {
 
       {!loading && bookings.length === 0 && (
         <Alert variant="info" className="text-center w-75 mx-auto">
-          No bookings found. Time to travel, maybe? 🌍✈️
+          No bookings found. Time to travel, maybe?
         </Alert>
       )}
 

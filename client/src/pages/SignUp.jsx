@@ -3,7 +3,15 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../features/authSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Card,
+  Alert,
+} from "react-bootstrap";
 import { BASE_URL } from "../utils/constants";
 import "../styles/Signform.css";
 
@@ -11,6 +19,7 @@ const SignUp = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,7 +40,9 @@ const SignUp = () => {
       dispatch(setUser(user));
       navigate("/");
     } catch (err) {
-      console.error("Error signing up:", err);
+      console.log(err);
+
+      setError(err.response.data.message);
       // Optional: set an error state for UI
     }
   };
@@ -49,7 +60,11 @@ const SignUp = () => {
                     Create your <span className="fw-bold">WanderLy</span>{" "}
                     account
                   </h3>
-
+                  {error && (
+                    <Alert variant="danger" className="mx-3">
+                      {error}
+                    </Alert>
+                  )}
                   <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formUsername">
                       <Form.Label>Username</Form.Label>

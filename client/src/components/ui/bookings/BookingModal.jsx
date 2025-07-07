@@ -18,12 +18,12 @@ const BookingModal = ({ show, closeModal, tourName }) => {
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false); // 🆕 loading flag
+  const [loading, setLoading] = useState(false); // loading flag
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "phone") {
-      const numeric = value.replace(/\D/g, "");
+      const numeric = value.replace(/\D/g, ""); // Replaces everything thats not a digit
       if (numeric.length <= 10) setForm((p) => ({ ...p, phone: numeric }));
     } else {
       setForm((p) => ({ ...p, [name]: value }));
@@ -34,20 +34,21 @@ const BookingModal = ({ show, closeModal, tourName }) => {
     e.preventDefault();
     setError("");
 
-    if (!/^[6-9]\d{9}$/.test(form.phone)) {
+    if (!/\d{10}$/.test(form.phone)) {
+      //checks
       setError("Please enter a valid 10-digit Indian phone number.");
       return;
     }
 
     try {
-      setLoading(true); // 🆕 start loader
+      setLoading(true);
       await axios.post(`${BASE_URL}/booking/`, form, { withCredentials: true });
       setSuccess(true);
     } catch (err) {
       console.error("Error booking tour:", err);
       setError("Failed to book the tour. Please try again later.");
     } finally {
-      setLoading(false); // 🆕 stop loader
+      setLoading(false);
     }
   };
 
