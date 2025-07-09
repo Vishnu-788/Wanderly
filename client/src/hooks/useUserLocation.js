@@ -3,15 +3,15 @@ import { useDispatch } from "react-redux";
 import { setLocation } from "../features/locationSlice";
 
 export const useUserLocation = () => {
-  const [location, setLocationState] = useState(null); // clearer name
-  const [locationError, setLocationError] = useState(""); // clearer name
+  const [location, setLocationState] = useState(null);
+  const [locationError, setLocationError] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
     const cachedLocation = localStorage.getItem("userLocation");
     const cachedTimestamp = localStorage.getItem("userLocationTimestamp");
     const isCacheValid =
-      cachedTimestamp && Date.now() - cachedTimestamp < 60 * 60 * 1000;
+      cachedTimestamp && Date.now() - cachedTimestamp < 60 * 60 * 1000; // 1 hour to milliseconds
 
     const updateLocation = (coords) => {
       setLocationState(coords);

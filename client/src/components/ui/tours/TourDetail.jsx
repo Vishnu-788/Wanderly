@@ -4,24 +4,34 @@ import { Button } from "react-bootstrap";
 import { FiMapPin, FiUsers, FiCompass } from "react-icons/fi";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { useSelector } from "react-redux";
-
-import "./tours.css";
+import { useUserLocation } from "../../../hooks/useUserLocation";
 import { calculateDistance } from "../../../utils/distanceCalc";
+import "./tours.css";
 
 const TourDetail = ({ tour, toggleReview, showReviews }) => {
   const user = useSelector((state) => state.auth.user);
-  const userLocation = useSelector((state) => state.location);
+  const { location, error: locationError } = useUserLocation();
   const [showBookingModal, setShowBookingModal] = useState(false);
 
   const { photo, title, city, desc, price, maxGroupSize, latitude, longitude } =
     tour;
-  // Get the distance between the user and the tour
-  const distanceBetween = calculateDistance(
-    userLocation.latitude,
-    userLocation.longitude,
-    latitude,
-    longitude
-  );
+
+  // Handle distance calculation safely
+  let distanceBetween = "N/A";
+
+  if (
+    !locationError &&
+    location &&
+    location.latitude != null &&
+    location.longitude != null
+  ) {
+    distanceBetween = calculateDistance(
+      location.latitude,
+      location.longitude,
+      latitude,
+      longitude
+    );
+  }
 
   return (
     <div className="tour-detail">
@@ -54,7 +64,9 @@ const TourDetail = ({ tour, toggleReview, showReviews }) => {
           <p className="text-muted">
             <FiMapPin className="me-1" /> {city} · <FiUsers className="me-1" />{" "}
             Max Group: {maxGroupSize} · <FiCompass className="me-1" />{" "}
-            {distanceBetween} km
+            {distanceBetween !== "N/A"
+              ? `${distanceBetween} km`
+              : "Distance N/A"}
           </p>
 
           <div className="flex-grow-1">
