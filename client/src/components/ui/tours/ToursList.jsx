@@ -37,7 +37,7 @@ const TourList = () => {
   return (
     <Row>
       {/* Left section */}
-      <Col md={6} className="list-pane">
+      <Col md={6} sm={12} className="list-pane">
         {showReviews ? (
           <Review tourId={selectedTour._id} />
         ) : (
@@ -78,7 +78,7 @@ const TourList = () => {
       </Col>
 
       {/* Right section */}
-      <Col md={6} className="detail-pane">
+      <Col md={6} sm={12} className="detail-pane">
         {selectedTour ? (
           <TourDetail
             tour={selectedTour}
