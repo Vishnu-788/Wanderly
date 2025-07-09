@@ -3,9 +3,11 @@ import axios from "axios";
 import { Form, Button, FloatingLabel, Alert } from "react-bootstrap";
 import "./review.css";
 import { BASE_URL } from "../../../utils/constants";
+import { useSelector } from "react-redux";
 
 function ReviewForm({ tourId, closeForm, onSubmitSuccess }) {
-  const [username, setUsername] = useState("");
+  const user = useSelector((state) => state.auth.user);
+
   const [rating, setRating] = useState(1);
   const [reviewText, setReviewText] = useState("");
   const [error, setError] = useState(null);
@@ -14,7 +16,7 @@ function ReviewForm({ tourId, closeForm, onSubmitSuccess }) {
     e.preventDefault();
     const data = {
       tourId: tourId,
-      username,
+      username: user.username,
       rating,
       reviewText,
     };
@@ -47,9 +49,8 @@ function ReviewForm({ tourId, closeForm, onSubmitSuccess }) {
           <Form.Control
             type="text"
             placeholder="Your name"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
+            value={user.username}
+            readOnly
           />
         </FloatingLabel>
 

@@ -2,9 +2,19 @@ import React from "react";
 import { FiMapPin } from "react-icons/fi";
 import { BsCurrencyRupee } from "react-icons/bs";
 import "./tours.css";
+import { useSelector } from "react-redux";
+import { calculateDistance } from "../../../utils/distanceCalc";
 
 const TourCard = ({ tour, onClick, active }) => {
-  const { photo, title, city, price } = tour;
+  const userLocation = useSelector((state) => state.location);
+  const { photo, title, city, price, latitude, longitude } = tour;
+  const distanceBetween = calculateDistance(
+    // gets the dist between the user current position and the tour location
+    userLocation.latitude,
+    userLocation.longitude,
+    latitude,
+    longitude
+  );
 
   return (
     <div

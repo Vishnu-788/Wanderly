@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Modal, Button, Form, Row, Col, Alert, Spinner } from "react-bootstrap"; // ⬅️ added Spinner
+import { Modal, Button, Form, Row, Col, Alert, Spinner } from "react-bootstrap";
 import { FiCalendar, FiPhone, FiUsers } from "react-icons/fi";
 import { MdEmail, MdOutlinePerson } from "react-icons/md";
 import { BASE_URL } from "../../../utils/constants";
 import BookingSuccess from "./BookingSuccess";
+import { useSelector } from "react-redux";
 
 const BookingModal = ({ show, closeModal, tourName }) => {
+  const user = useSelector((state) => state.auth.user);
+
   const [form, setForm] = useState({
     userEmail: "",
     tourName: tourName ?? "",
@@ -18,15 +21,27 @@ const BookingModal = ({ show, closeModal, tourName }) => {
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false); // loading flag
+  const [loading, setLoading] = useState(false);
+
+  // Auto-fill name & email from Redux user when modal opens
+  useEffect(() => {
+    if (user && show) {
+      setForm((prev) => ({
+        ...prev,
+        userEmail: user.email || "",
+        fullName: user.fullName || "",
+      }));
+    }
+  }, [user, show]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "phone") {
-      const numeric = value.replace(/\D/g, ""); // Replaces everything thats not a digit
-      if (numeric.length <= 10) setForm((p) => ({ ...p, phone: numeric }));
+      const numeric = value.replace(/\D/g, "");
+      if (numeric.length <= 10)
+        setForm((prev) => ({ ...prev, phone: numeric }));
     } else {
-      setForm((p) => ({ ...p, [name]: value }));
+      setForm((prev) => ({ ...prev, [name]: value }));
     }
   };
 
@@ -34,8 +49,7 @@ const BookingModal = ({ show, closeModal, tourName }) => {
     e.preventDefault();
     setError("");
 
-    if (!/\d{10}$/.test(form.phone)) {
-      //checks
+    if (!/^[6-9]\d{9}$/.test(form.phone)) {
       setError("Please enter a valid 10-digit Indian phone number.");
       return;
     }
@@ -72,7 +86,6 @@ const BookingModal = ({ show, closeModal, tourName }) => {
 
   return (
     <Modal show={show} onHide={closeModal} centered>
-      {/* disable whole form while loading to prevent edits */}
       <Form onSubmit={handleSubmit}>
         {!success ? (
           <>
@@ -80,14 +93,9 @@ const BookingModal = ({ show, closeModal, tourName }) => {
               <Modal.Title>Book Your Trip</Modal.Title>
             </Modal.Header>
 
-            {/* fieldset disables children when loading */}
-            <fieldset
-              disabled={loading}
-              style={{ border: "0", margin: 0, padding: 0 }}
-            >
+            <fieldset disabled={loading} style={{ border: 0, margin: 0 }}>
               <Modal.Body>
-                {/* === Email === */}
-                <Form.Group className="mb-3" controlId="bookingEmail">
+                <Form.Group className="mb-3">
                   <Form.Label>
                     <MdEmail className="me-1" /> Email
                   </Form.Label>
@@ -96,13 +104,11 @@ const BookingModal = ({ show, closeModal, tourName }) => {
                     name="userEmail"
                     value={form.userEmail}
                     onChange={handleChange}
-                    placeholder="you@example.com"
                     required
                   />
                 </Form.Group>
 
-                {/* === Full Name === */}
-                <Form.Group className="mb-3" controlId="bookingName">
+                <Form.Group className="mb-3">
                   <Form.Label>
                     <MdOutlinePerson className="me-1" /> Full Name
                   </Form.Label>
@@ -111,15 +117,13 @@ const BookingModal = ({ show, closeModal, tourName }) => {
                     name="fullName"
                     value={form.fullName}
                     onChange={handleChange}
-                    placeholder="Your Name"
                     required
                   />
                 </Form.Group>
 
-                {/* === Tour + Guests === */}
                 <Row className="mb-3">
                   <Col md={8}>
-                    <Form.Group controlId="bookingTour">
+                    <Form.Group>
                       <Form.Label>Tour</Form.Label>
                       <Form.Control
                         type="text"
@@ -130,7 +134,7 @@ const BookingModal = ({ show, closeModal, tourName }) => {
                     </Form.Group>
                   </Col>
                   <Col md={4}>
-                    <Form.Group controlId="bookingGuests">
+                    <Form.Group>
                       <Form.Label>
                         <FiUsers className="me-1" /> Guests
                       </Form.Label>
@@ -146,8 +150,7 @@ const BookingModal = ({ show, closeModal, tourName }) => {
                   </Col>
                 </Row>
 
-                {/* === Phone === */}
-                <Form.Group className="mb-3" controlId="bookingPhone">
+                <Form.Group className="mb-3">
                   <Form.Label>
                     <FiPhone className="me-1" /> Phone
                   </Form.Label>
@@ -160,15 +163,9 @@ const BookingModal = ({ show, closeModal, tourName }) => {
                     title="Enter a valid 10-digit Indian mobile number"
                     required
                   />
-                  {form.phone && form.phone.length < 10 && (
-                    <div className="text-danger small mt-1">
-                      Phone number must be 10 digits
-                    </div>
-                  )}
                 </Form.Group>
 
-                {/* === Date === */}
-                <Form.Group className="mb-1" controlId="bookingDate">
+                <Form.Group>
                   <Form.Label>
                     <FiCalendar className="me-1" /> Travel Date
                   </Form.Label>
